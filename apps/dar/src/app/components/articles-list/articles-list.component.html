@@ -1,0 +1,17 @@
+<div class="articles-list">
+    <table *ngIf="articles && articles.length; else noArticles">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Created at</th>
+        </tr>
+        <tr *ngFor="let article of articles">
+            <td>{{ article.id }}</td>
+            <td>{{ article.title }}</td>
+            <td>{{ article.created_at | date }}</td>
+        </tr>
+    </table>
+    <ng-template #noArticles>
+        <div>No articles found</div>
+    </ng-template>
+</div>
