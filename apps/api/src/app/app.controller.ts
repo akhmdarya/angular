@@ -25,12 +25,13 @@ export class AppController {
         map(res => res.data)
       )
   }
-  // @Get('/categories') 
-  // getArticles() {
-  //   return this.httpClient
-  //     .get(`https://media-api.dar-dev.zone/api/articles?limit=5&sort=id:DESC`)
-  //     .pipe(
-  //       map(res => res.data)
-  //     )
-  // }
+  @Get('/') 
+  getCategories() {
+    return this.httpClient
+      .get(`https://media-api.dar-dev.zone/api/categories`)
+      .pipe(
+        map(res => res.data)
+      )
+  }
 }
+

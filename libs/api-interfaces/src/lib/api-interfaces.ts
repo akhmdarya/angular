@@ -9,3 +9,8 @@ export interface Article {
   annotation: string;
   created_at: string;
 }
+export interface Category {
+  id: string;
+  title: string;
+
+}

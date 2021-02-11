@@ -1,0 +1,13 @@
+<div class="categories-list">
+    <div  class='categories_inner' *ngIf="categories && categories.length; else noCategories">
+    
+        <div class='categories_inner' *ngFor="let category of categories">
+            <!-- <p>{{ category.id }}</p> -->
+            <p>{{ category.title }}</p>
+        
+        </div>
+    </div>
+    <ng-template #noCategories>
+        <div>No categories found</div>
+    </ng-template>
+</div>

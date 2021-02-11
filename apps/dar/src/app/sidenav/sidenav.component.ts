@@ -31,7 +31,13 @@ export class SidenavComponent implements OnInit {
       link: '/test',
       isDisabled: false,
       isHidden: true,
-    }
+    },
+    // {
+    //   title: 'Categories',
+    //   link: '',
+    //   isDisabled: false,
+    //   isHidden: false,
+    // }
 ];
 
   constructor() { }
