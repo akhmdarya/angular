@@ -1,8 +1,8 @@
 <div class="categories-list">
     <div  class='categories_inner' *ngIf="categories && categories.length; else noCategories">
     
-        <div class='categories_inner' *ngFor="let category of categories">
-            <!-- <p>{{ category.id }}</p> -->
+        <div class='categories_inner' *ngFor="let category of categories"  (click)="rowClickHandlerCat(category)">
+            <p>{{ category.id }}</p>
             <p>{{ category.title }}</p>
         
         </div>

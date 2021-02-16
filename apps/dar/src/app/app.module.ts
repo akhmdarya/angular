@@ -8,10 +8,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { GreetingComponent } from './pages/greeting/greeting.component';
 import { AppRoutingModule } from './app-routing.module';
 // import { ArticlesComponent } from './pages/articles/articles.component';
-import { CategoriesComponent } from './pages/categories/categories.component';
 import { HttpClientModule } from '@angular/common/http';
 // import { ArticlesListComponent } from './components/articles-list/articles-list.component';
-import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +19,6 @@ import { CategoriesListComponent } from './components/categories-list/categories
     SidenavComponent,
     GreetingComponent,
   
-    CategoriesComponent,
-    CategoriesListComponent,
   ],
   imports: [
     BrowserModule,
