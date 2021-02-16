@@ -1,0 +1,15 @@
+<div *ngIf="article$ | async as article; else noArticle" class="article-details">
+    <div class="article-detail">
+      {{ article.id }}
+    </div>
+    <div class="article-detail">
+      {{ article.title }}
+    </div>
+    <div class="article-detail">
+      {{ article.annotation }}
+    </div>
+  </div>
+  <ng-template #noArticle>
+    No article for such id
+  </ng-template>
+  

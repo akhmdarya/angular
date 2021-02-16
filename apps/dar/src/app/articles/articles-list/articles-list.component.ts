@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Article } from '@dar-lab-ng/api-interfaces';
 
 @Component({
@@ -6,14 +6,15 @@ import { Article } from '@dar-lab-ng/api-interfaces';
   templateUrl: './articles-list.component.html',
   styleUrls: ['./articles-list.component.scss']
 })
-export class ArticlesListComponent implements OnInit {
+export class ArticlesListComponent {
 
   @Input()
   articles: Article[] = [];
-  
-  constructor() { }
 
-  ngOnInit(): void {
+  @Output()
+  rowClicked = new EventEmitter<Article>();
+
+  rowClickHandler(article: Article) {
+    this.rowClicked.emit(article);
   }
-
 }

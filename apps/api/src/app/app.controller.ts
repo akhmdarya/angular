@@ -1,4 +1,4 @@
-import { Controller, Get, HttpService } from '@nestjs/common';
+import { Controller, Get, HttpService, Param } from '@nestjs/common';
 
 import { Message } from '@dar-lab-ng/api-interfaces';
 
@@ -25,6 +25,15 @@ export class AppController {
         map(res => res.data)
       )
   }
+  @Get('/articles/:id')
+  getArticle(@Param('id') id) {
+    return this.httpClient
+      .get(`https://media-api.dar-dev.zone/api/articles/${id}`)
+      .pipe(
+        map(res => res.data)
+      )
+  }
+
   @Get('/') 
   getCategories() {
     return this.httpClient
@@ -33,5 +42,24 @@ export class AppController {
         map(res => res.data)
       )
   }
+  @Get('/categories')
+  getCategoriess() {
+    return this.httpClient
+      .get(`https://media-api.dar-dev.zone/api/categories`)
+      .pipe(
+        map(res => res.data)
+      )
+  }
+
+  @Get('/category/:id')
+  getCategory(@Param('id') id) {
+    return this.httpClient
+      .get(`https://media-api.dar-dev.zone/api/categories/${id}`)
+      .pipe(
+        map(res => res.data)
+      )
+  }
 }
+
+
 

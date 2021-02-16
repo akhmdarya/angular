@@ -2,6 +2,14 @@
     table {
         width: 100%;
 
+        tr {
+          cursor: pointer;
+
+          &:hover {
+            background-color: #4fc3f7;
+          }
+        }
+
         td, th {
             padding: 0.5rem;
             text-align: left;

@@ -5,10 +5,12 @@
             <th>Title</th>
             <th>Created at</th>
         </tr>
-        <tr *ngFor="let article of articles">
+        <tr *ngFor="let article of articles" (click)="rowClickHandler(article)">
             <td>{{ article.id }}</td>
             <td>{{ article.title }}</td>
+            <td>{{ article.category_id }} {{ article.category_title }}</td>
             <td>{{ article.created_at | date }}</td>
+
         </tr>
     </table>
     <ng-template #noArticles>
