@@ -5,7 +5,8 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoryResolver } from './category.resolver';
 import { CategoryComponent } from './category/category.component';
-import { FormsModule } from '@angular/forms';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,12 +14,12 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     CategoriesComponent,
     CategoriesListComponent,
-    CategoriesComponent,
+ 
     CategoryComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     CategoriesRoutingModule,
   ],
   providers: [

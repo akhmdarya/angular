@@ -1,3 +1,70 @@
-<div *ngIf="category">
-  {{ category.title }}
+
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <div *ngIf="category">
+      {{ category.title }}
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+      <div class="error" *ngIf="form.controls.title.errors">
+        <div *ngIf="form.controls.title.errors.required">
+          This field is required
+        </div>
+        <div *ngIf="form.controls.title.errors.minlength">
+          The min length of this field is {{ form.controls.title.errors.minlength.requiredLength }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit">Save</button>
+</form>
+
+<ng-template #noArticle>
+  No article for such id
+</ng-template>
+
+
+<!-- <div *ngIf="article$ | async as article; else noArticle" class="article-details">
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="article-detail">
+      ID: {{ article.id }}
+    </div>
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+      <div class="error" *ngIf="form.controls.title.errors">
+        <div *ngIf="form.controls.title.errors.required">
+          This field is required
+        </div>
+        <div *ngIf="form.controls.title.errors.minlength">
+          The min length of this field is {{ form.controls.title.errors.minlength.requiredLength }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Annotation</label>
+      <input type="text" formControlName="annotation" />
+    </div>
+    <div class="form-group">
+      <label>Is Published</label>
+      <input type="checkbox" formControlName="is_published" />
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <select formControlName="category_id">
+        <option *ngFor="let category of categories$ | async" [value]="category.id" >{{ category.title }}</option>
+      </select>
+    </div>
+    <div class="form-group tags">
+      <label>Tags</label>
+      <div *ngFor="let tagGroup of form.controls.tags.controls; let idx = index" [formGroup]="tagGroup">
+        <input type="text" formControlName="name" />
+      </div>
+      <button type="button" (click)="addTag()">Add tag</button>
+    </div>
+    <button type="submit">Save</button>
+  </form>
+
 </div>
+<ng-template #noArticle>
+  No article for such id
+</ng-template> -->

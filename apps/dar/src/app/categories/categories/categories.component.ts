@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from '@dar-lab-ng/api-interfaces';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'dar-categories',
@@ -14,7 +15,7 @@ export class CategoriesComponent implements OnInit {
 
   categories$: Observable<Category[]>;
 
-  searchTerm = '';
+  searchTerm: FormControl;
 
   constructor(
     
@@ -23,6 +24,18 @@ export class CategoriesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.searchTerm = new FormControl('');
+
+    // this.searchTerm
+    // .valueChanges
+    // .pipe(
+    //   debounceTime(500)
+    // )
+    // .subscribe(term => {
+    //   console.log(term)
+    //   this.getData()
+    // })
+ 
     this.getData();
   }
 
@@ -30,10 +43,8 @@ export class CategoriesComponent implements OnInit {
     this.categories$ = this.httpClient
       .get<Category[]>(`/api/categories`)
       .pipe(
-        map(categories => this.searchTerm ?
-          categories.filter(c => c.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
-            : categories
-        )
+        map((categories: Category[]) => this.searchTerm ?
+        categories.filter(a => a.title.toLowerCase().includes(this.searchTerm.value.toLowerCase())) : categories)
       )
   }
 

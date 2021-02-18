@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from '@dar-lab-ng/api-interfaces';
+import { Article, Category } from '@dar-lab-ng/api-interfaces';
 import { of } from 'rxjs';
 import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { switchMap, catchError } from 'rxjs/operators';
+import { switchMap, catchError, tap } from 'rxjs/operators';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'dar-category',
@@ -15,12 +16,20 @@ export class CategoryComponent implements OnInit {
   private http: HttpClient;
   category: Category;
   category$: Observable<Category>;
+  form: FormGroup;
 
   constructor(
    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+
+    this.form = new FormGroup({
+      title: new FormControl('', [Validators.required] )
+     
+    });
+
+
     this.route.data.subscribe(data => {
       this.category = data.category;
     })
@@ -33,7 +42,13 @@ export class CategoryComponent implements OnInit {
         console.error(err);
         return of(null);
       })
-    );
+    ),
+    tap((category: Category | null) => {
+      if (category) {
+        this.form.patchValue(category);
+        
+      }
+    });
   }
 
 }
