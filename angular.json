@@ -1,7 +1,8 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
   },
   "schematics": {
     "@nrwl/angular": {
@@ -36,7 +37,7 @@
       "projectType": "application",
       "root": "apps/dar",
       "sourceRoot": "apps/dar/src",
-      "prefix": "dar-lab-ng",
+      "prefix": "dar",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -47,8 +48,13 @@
             "polyfills": "apps/dar/src/polyfills.ts",
             "tsConfig": "apps/dar/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/dar/src/favicon.ico", "apps/dar/src/assets"],
-            "styles": ["apps/dar/src/styles.scss"],
+            "assets": [
+              "apps/dar/src/favicon.ico",
+              "apps/dar/src/assets"
+            ],
+            "styles": [
+              "apps/dar/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -110,7 +116,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/dar"],
+          "outputs": [
+            "coverage/apps/dar"
+          ],
           "options": {
             "jestConfig": "apps/dar/jest.config.js",
             "passWithNoTests": true
@@ -139,7 +147,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/dar-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/dar-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -152,12 +162,16 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "assets": [
+              "apps/api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -182,12 +196,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/api/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
+          "outputs": [
+            "coverage/apps/api"
+          ],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
@@ -203,7 +221,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/api-interfaces/**/*.ts"
+            ]
           }
         }
       }

@@ -17,7 +17,7 @@ export class AppController {
     return this.appService.getData();
   }
 
-  @Get('/articles') 
+  @Get('/articles')
   getArticles() {
     return this.httpClient
       .get(`https://media-api.dar-dev.zone/api/articles?limit=5&sort=id:DESC`)
@@ -25,6 +25,7 @@ export class AppController {
         map(res => res.data)
       )
   }
+
   @Get('/articles/:id')
   getArticle(@Param('id') id) {
     return this.httpClient
@@ -34,16 +35,8 @@ export class AppController {
       )
   }
 
-  @Get('/') 
-  getCategories() {
-    return this.httpClient
-      .get(`https://media-api.dar-dev.zone/api/categories`)
-      .pipe(
-        map(res => res.data)
-      )
-  }
   @Get('/categories')
-  getCategoriess() {
+  getCategories() {
     return this.httpClient
       .get(`https://media-api.dar-dev.zone/api/categories`)
       .pipe(
@@ -60,6 +53,3 @@ export class AppController {
       )
   }
 }
-
-
-

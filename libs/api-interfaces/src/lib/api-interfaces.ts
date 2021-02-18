@@ -10,10 +10,13 @@ export interface Article {
   created_at: string;
   category_id: string;
   category_title?: string;
+  tags: {
+    name: string;
+  }[];
+  is_published: boolean;
 }
 
 export interface Category {
   id: string;
   title: string;
-
 }

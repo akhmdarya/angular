@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Article, Category } from '@dar-lab-ng/api-interfaces';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, debounceTime, map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'dar-articles',
@@ -14,18 +15,37 @@ export class ArticlesComponent implements OnInit {
 
   articles$: Observable<Article[]>;
 
+  searchTerm: FormControl;
+
   constructor(
     private httpClient: HttpClient,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+
+    this.searchTerm = new FormControl('');
+
+    this.searchTerm
+      .valueChanges
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe(term => {
+        console.log(term)
+        this.getData()
+      })
+
+    this.getData();
+  }
+
+  getData() {
     this.articles$ = this.httpClient
       .get<Article[]>(`/api/articles?limit=5&sort=id:DESC`)
       .pipe(
         catchError(() => of(null)),
         mergeMap(articles => (
-          !articles ? of(null) :
+          !articles ? of([]) :
             this.httpClient.get<Category[]>(`/api/categories`)
               .pipe(
                 map(categories => {
@@ -39,7 +59,9 @@ export class ArticlesComponent implements OnInit {
                 }),
                 catchError(() => of(articles))
               )
-        ))
+        )),
+        map((articles: Article[]) => this.searchTerm ?
+        articles.filter(a => a.title.toLowerCase().includes(this.searchTerm.value.toLowerCase())) : articles)
       )
   }
 

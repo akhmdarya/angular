@@ -1,11 +1,23 @@
 .article-details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.article-detail {
+  margin-bottom: 1rem;
+}
+
+.form {
+  width: 90%;
+
+  input[type="text"] {
+    min-width: 320px;
   }
-  
-  .article-detail {
-    margin-bottom: 1rem;
+
+  .error {
+    color: red;
+    margin: 5px;
   }
-  
+}

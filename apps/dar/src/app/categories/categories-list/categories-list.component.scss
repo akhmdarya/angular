@@ -1,10 +1,10 @@
+.categories-list {
+    table {
+        width: 100%;
 
-.categories-list{
-    display: flex;
-    align-items: center;
-}
-.categories_inner{
-    margin-left: 20px;
-    display: flex;
-    align-items: center;
+        td, th {
+            padding: 0.5rem;
+            text-align: left;
+        }
+    }
 }

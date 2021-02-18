@@ -21,6 +21,12 @@ export class SidenavComponent implements OnInit {
       isHidden: false,
     },
     {
+      title: 'Categories',
+      link: '/categories',
+      isDisabled: false,
+      isHidden: false,
+    },
+    {
       title: 'Disabled',
       link: '/disabled',
       isDisabled: true,
@@ -31,12 +37,6 @@ export class SidenavComponent implements OnInit {
       link: '/test',
       isDisabled: false,
       isHidden: true,
-    },
-    {
-      title: 'Categories',
-      link: '/categories',
-      isDisabled: false,
-      isHidden: false,
     }
 ];
 
