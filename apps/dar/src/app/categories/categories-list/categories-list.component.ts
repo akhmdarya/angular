@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Category } from '@dar-lab-ng/api-interfaces';
 
 @Component({
@@ -10,5 +10,12 @@ export class CategoriesListComponent {
 
   @Input()
   categories: Category[] = [];
+
+  @Output()
+  rowClicked = new EventEmitter<Category>();
+
+  rowClickHandlerCat(category: Category) {
+    this.rowClicked.emit(category);
+  }
 
 }

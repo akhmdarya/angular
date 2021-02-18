@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from '@dar-lab-ng/api-interfaces';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -16,7 +17,9 @@ export class CategoriesComponent implements OnInit {
   searchTerm = '';
 
   constructor(
-    private httpClient: HttpClient
+    
+    private httpClient: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,5 +44,8 @@ export class CategoriesComponent implements OnInit {
   onSearchClick() {
     this.getData();
   }
-
+  rowClickHandlerCat(category: Category) {
+    console.log(category)
+    this.router.navigate(['categories', category.id]);
+  }
 }

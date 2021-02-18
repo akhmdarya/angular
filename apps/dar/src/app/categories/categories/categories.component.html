@@ -4,5 +4,7 @@
     <input type="text" placeholder="Search categories" [(ngModel)]="searchTerm" (ngModelChange)="modelChanges()" />
     <button [disabled]="searchTerm.length < 3" (click)="onSearchClick()">Search</button>
   </div>
-</div>
-<dar-categories-list [categories]="categories$ | async"></dar-categories-list>
+<!-- </div>
+<dar-categories-list [categories]="categories$ | async"></dar-categories-list> -->
+<dar-categories-list [categories]="categories$ | async" (rowClicked)="rowClickHandlerCat($event)"></dar-categories-list>
+
