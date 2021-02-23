@@ -1,0 +1,37 @@
+<form class="form" *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmitHandler()">
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" formControlName="title" />
+    <div class="error" *ngIf="(submitted || !form.controls.title.pristine) && form.controls.title.errors">
+      <div *ngIf="form.controls.title.errors.required">
+        This field is required
+      </div>
+      <div *ngIf="form.controls.title.errors.minlength">
+        The min length of this field is {{ form.controls.title.errors.minlength.requiredLength }}
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Annotation</label>
+    <input type="text" formControlName="annotation" />
+  </div>
+  <div class="form-group">
+    <label>Is Published</label>
+    <input type="checkbox" formControlName="is_published" />
+  </div>
+  <div class="form-group">
+    <label>Category</label>
+    <select formControlName="category_id">
+      <option *ngFor="let category of categories" [value]="category.id" >{{ category.title }}</option>
+    </select>
+  </div>
+  <div class="form-group tags">
+    <label>Tags</label>
+    <div *ngFor="let tagGroup of form.controls.tags.controls; let idx = index" class="tag-control" [formGroup]="tagGroup">
+      <input type="text" formControlName="name" />
+      <button (click)="onRemoveTag(idx)">Remove tag</button>
+    </div>
+    <button type="button" (click)="onAddTag()">Add tag</button>
+  </div>
+  <button type="submit">Save</button>
+</form>

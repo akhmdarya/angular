@@ -1,5 +1,5 @@
-<div *ngIf="article$ | async as article; else noArticle" class="article-details">
-  <h2>Edit article ID: {{ article.id }}</h2>
+<div class="article-details">
+  <h2>Create Article</h2>
   <dar-article-form
     [form]="form"
     [categories]="categories$ | async"
@@ -8,6 +8,3 @@
     (removeTag)="removeTag($event)"
   ></dar-article-form>
 </div>
-<ng-template #noArticle>
-  No article for such id
-</ng-template>

@@ -1,0 +1,28 @@
+:host {
+    display: flex;
+    width: 100%;
+  }
+  
+  .form {
+    width: 90%;
+  
+    input[type="text"] {
+      min-width: 320px;
+    }
+  
+    .error {
+      color: red;
+      margin: 5px;
+    }
+  }
+  
+  .tags {
+    input {
+      margin-right: 0.5rem;
+    }
+  
+    .tag-control {
+      display: flex;
+    }
+  }
+  

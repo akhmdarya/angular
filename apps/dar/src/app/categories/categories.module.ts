@@ -7,6 +7,8 @@ import { CategoryResolver } from './category.resolver';
 import { CategoryComponent } from './category/category.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoryCreateComponent } from './category-create/category-create.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 
 
@@ -15,7 +17,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     CategoriesComponent,
     CategoriesListComponent,
  
-    CategoryComponent
+    CategoryComponent,
+ 
+    CategoryCreateComponent,
+ 
+    CategoryFormComponent
   ],
   imports: [
     CommonModule,

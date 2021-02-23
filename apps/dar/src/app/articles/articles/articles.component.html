@@ -4,4 +4,5 @@
     <input type="text" placeholder="Search articles" [formControl]="searchTerm" />
   </div>
 </div>
+<a [routerLink]="'/articles/create'">New article</a>
 <dar-articles-list [articles]="articles$ | async" (rowClicked)="rowClickHandler($event)"></dar-articles-list>

@@ -21,3 +21,22 @@ export class CategoryResolver implements Resolve<Category> {
       }));
   }
 }
+
+
+
+// @Injectable()
+// export class ArticleResolver implements Resolve<Article> {
+
+//   constructor(
+//     private articleService: ArticlesService
+//   ) {}
+
+//   resolve(route: ActivatedRouteSnapshot) {
+//     const articleId = route.params.id;
+//     return this.articleService.getArticle(articleId)
+//         .pipe(catchError(() => {
+//           // TODO: Redirect to 404 Page
+//           return of(null);
+//         }));
+//   }
+// }

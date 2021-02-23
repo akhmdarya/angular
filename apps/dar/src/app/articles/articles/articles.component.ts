@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Article, Category } from '@dar-lab-ng/api-interfaces';
+import { Article } from '@dar-lab-ng/api-interfaces';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, map, mergeMap } from 'rxjs/operators';
+import { CategoriesService } from '../../categories/categories.service';
+import { ArticlesService } from '../articles.service';
 
 @Component({
   selector: 'dar-articles',
@@ -18,7 +19,8 @@ export class ArticlesComponent implements OnInit {
   searchTerm: FormControl;
 
   constructor(
-    private httpClient: HttpClient,
+    private articlesService: ArticlesService,
+    private categoriesService: CategoriesService,
     private router: Router
   ) { }
 
@@ -40,13 +42,12 @@ export class ArticlesComponent implements OnInit {
   }
 
   getData() {
-    this.articles$ = this.httpClient
-      .get<Article[]>(`/api/articles?limit=5&sort=id:DESC`)
+    this.articles$ = this.articlesService.getArticles()
       .pipe(
         catchError(() => of(null)),
         mergeMap(articles => (
           !articles ? of([]) :
-            this.httpClient.get<Category[]>(`/api/categories`)
+            this.categoriesService.getCategories()
               .pipe(
                 map(categories => {
                   return articles.map(article => {

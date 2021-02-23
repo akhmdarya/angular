@@ -36,19 +36,31 @@ export class CategoryComponent implements OnInit {
 
     this.category$ = this.route.params
     .pipe(
+    
       switchMap(params => this.http
         .get<Category>(`/api/category/${params.id}`)),
+       
       catchError(err => {
         console.error(err);
+
         return of(null);
-      })
-    ),
-    tap((category: Category | null) => {
-      if (category) {
-        this.form.patchValue(category);
+      }),
+      tap((category: Category | null) => {
+        console.log(category+"!!!!!!!!!!!!!!!!!!")
+        if (category) {
+          console.log(category+"!!!!!!!!!!!!!!!!!!")
+          this.form.patchValue(category)
         
-      }
-    });
+          
+        }
+      })
+    );
+  }
+  onSubmit() {
+    console.log(this.form.value)
+    if (!this.form.valid) {
+      return;
+    }
   }
 
 }
