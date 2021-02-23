@@ -1,5 +1,5 @@
 
-<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<!-- <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <div *ngIf="category">
       {{ category.title }}
@@ -16,5 +16,19 @@
     </div>
   </div>
   <button type="submit">Save</button>
-</form>
+</form> -->
+
+
+<div *ngIf="category$ | async as category; else noArticle" class="article-details">
+  <h2>Edit category ID: {{ category.id }}</h2>
+  <dar-category-form
+    [form]="form"
+   
+    (formSubmit)="onSubmit()"
+   
+  ></dar-category-form>
+</div>
+<ng-template #noArticle>
+  No article for such id
+</ng-template>
 

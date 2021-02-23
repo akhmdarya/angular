@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article, Category } from '@dar-lab-ng/api-interfaces';
 import { of } from 'rxjs';
 import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { switchMap, catchError, tap } from 'rxjs/operators';
+import { switchMap, catchError, tap, map } from 'rxjs/operators';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CategoriesService } from '../categories.service';
 
 @Component({
   selector: 'dar-category',
@@ -13,54 +14,58 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  private http: HttpClient;
-  category: Category;
+  
   category$: Observable<Category>;
+  categories$: Observable<Category[]>;
+
   form: FormGroup;
+  id: string;
 
   constructor(
-   private route: ActivatedRoute
+    private categoryService: CategoriesService,
+  
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
 
-    this.form = new FormGroup({
-      title: new FormControl('', [Validators.required] )
-     
-    });
+    this.form = this.categoryService.createCategoryForm();
 
-
-    this.route.data.subscribe(data => {
-      this.category = data.category;
-    })
-
-    this.category$ = this.route.params
-    .pipe(
-    
-      switchMap(params => this.http
-        .get<Category>(`/api/category/${params.id}`)),
-       
-      catchError(err => {
-        console.error(err);
-
-        return of(null);
-      }),
-      tap((category: Category | null) => {
-        console.log(category+"!!!!!!!!!!!!!!!!!!")
-        if (category) {
-          console.log(category+"!!!!!!!!!!!!!!!!!!")
-          this.form.patchValue(category)
-        
-          
-        }
-      })
-    );
+    this.category$ = this.route.data
+      .pipe(
+        map(data => data.category),
+        tap((category: Category | null) => {
+          if (category) {
+            this.id = category.id;
+            this.categoryService.pathCategoryForm(category, this.form)
+          }
+        })
+      )
+   
   }
+
+
+
   onSubmit() {
     console.log(this.form.value)
-    if (!this.form.valid) {
+    if (!this.form.valid && this.id) {
       return;
     }
+
+    this.categoryService.updateCategory(this.id, this.form.value)
+      .pipe(
+        catchError(err => {
+          console.error(err);
+          return of(null);
+        })
+      )
+      .subscribe(res => {
+        console.log(res)
+        if (res && res.id) {
+          this.router.navigate(['/categories'])
+        }
+      })
   }
 
 }

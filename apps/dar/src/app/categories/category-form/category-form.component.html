@@ -1,1 +1,17 @@
-<p>category-form works!</p>
+<form class="form" *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmitHandler()">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+      <div class="error" *ngIf="(submitted || !form.controls.title.pristine) && form.controls.title.errors">
+        <div *ngIf="form.controls.title.errors.required">
+          This field is required
+        </div>
+        <div *ngIf="form.controls.title.errors.minlength">
+          The min length of this field is {{ form.controls.title.errors.minlength.requiredLength }}
+        </div>
+      </div>
+    </div>
+   
+
+    <button type="submit">Save</button>
+  </form>

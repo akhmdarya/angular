@@ -6,5 +6,6 @@
   </div>
 <!-- </div>
 <dar-categories-list [categories]="categories$ | async"></dar-categories-list> -->
+<a [routerLink]="'/categories/create'">New category</a>
 <dar-categories-list [categories]="categories$ | async" (rowClicked)="rowClickHandlerCat($event)"></dar-categories-list>
 
